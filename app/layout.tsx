@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import GlobalStyleProvider from "./providers/GlobalStyleProvider";
 import ContextProvider from "./providers/ContextProvider";
-import { ClerkProvider } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+import { ClerkProvider, auth } from "@clerk/nextjs";
+import NwxtTopLoader from "nextjs-toploader";
 
-const inter = Inter({ subsets: ["latin"] });
+const nunito = Nunito({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,7 +36,12 @@ export default function RootLayout({
             referrerPolicy="no-referrer"
           />
         </head>
-        <body className={inter.className}>
+        <body className={nunito.className}>
+          <NwxtTopLoader
+            height={2}
+            color="#27AE60"
+            easing="cubic-bezier(0.53,0.21,0,1)"
+          />
           <ContextProvider>
             <GlobalStyleProvider>
               {userId && <Sidebar />}
